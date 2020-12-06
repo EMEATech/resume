@@ -1,0 +1,78 @@
+---
+# Personal details
+name: John Wayne
+address:
+- Hereandthere, 00, 9722JL, Here, There
+email: me@mail.com
+# Insert URLs without http://
+urls:
+  home: yourhome.com
+  twitter: twitterid
+  github: githubid
+  linkedin: linkedinid
+
+# Sections
+
+intro: "Some nice words about yourself."
+
+skills:
+- clicking
+- double-clicking
+- stuff
+- other stuff
+
+languages:
+- language: Italian
+  proficiency: native
+- language: English
+  proficiency: C1
+- language: German
+  proficiency: C1
+- language: French
+  proficiency: B1
+
+
+experience:
+- years: Jan. 2018 - Oct. 2018
+  employer: Good corp
+  job: Engineer
+  city: There, Italy
+  description: Did good things
+- years: Aug. 2015 - Nov. 2015
+  employer: Evil Corp
+  job: Intern
+  city: Here, Italy
+  description: Did bad things
+
+education:
+- year: 2013-2015
+  subject: Philosophy
+  degree: Master of Arts
+  field: Philosophy of Language
+  institute: That famous university
+  grade: 110/110 cum laude
+  city: The City
+
+courses:
+- course: Knitting course
+
+
+organizations:
+- organization: Association of this and that
+- role: Member
+- year: 2019-present
+
+
+award:
+- title: Winner of that competition, you know
+  date: September 2017
+  issuer: Mr. Smith
+  description: I did something
+
+mainfont: Linux Libertine
+fontsize: 10pt
+lang: en-GB
+geometry: a4paper, left=35mm, right=35mm, top=51mm, bottom=17mm
+bibliography: bibliography.bib
+nocite: '@*'
+---

@@ -1,0 +1,22 @@
+name: Generate CV in PDF format
+
+on: push
+
+jobs:
+  convert_via_pandoc:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          mkdir output  # create output dir
+      - uses: docker://angelobasile/cvgenerator:1.3
+        with:
+          args: details.yml -f markdown -t latex --output=output/cv.tex --template=template.tex --pdf-engine=xelatex --biblatex
+      - run: |
+          cp bibliography.bib output/
+      - run: |
+          docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` --entrypoint "/data/compile.sh" angelobasile/cvgenerator:1.3
+      - uses: actions/upload-artifact@master
+        with:
+          name: output
+          path: output

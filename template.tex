@@ -1,0 +1,193 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+\documentclass[$fontsize$, a4paper]{article}
+
+% LAYOUT
+%--------------------------------
+% Margins
+\usepackage{geometry} 
+\geometry{$geometry$}
+
+% Do not indent paragraphs
+\setlength\parindent{0in}
+
+% Enable multicolumns
+\usepackage{multicol}
+\setlength{\columnsep}{-3.5cm}
+
+% Uncomment to suppress page numbers
+% \pagenumbering{gobble}
+
+% LANGUAGE
+%--------------------------------
+% Set the main language
+$if(lang)$
+\usepackage{polyglossia}
+\setmainlanguage{$lang$}
+$endif$
+
+% TYPOGRAPHY
+%--------------------------------
+\usepackage{fontspec} 
+\usepackage{fontawesome5}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{xcolor}
+% converts LaTeX specials (quotes, dashes etc.) to Unicode
+\defaultfontfeatures{Mapping=tex-text}
+\setromanfont [Ligatures={Common}, Numbers={OldStyle}]{$mainfont$}
+% Cool ampersand
+\newcommand{\amper}{{\fontspec[Scale=.95]{$mainfont$}\selectfont\itshape\&}}
+
+% MARGIN NOTES
+%--------------------------------
+\usepackage{marginnote}
+\newcommand{\note}[1]{\marginnote{\scriptsize #1}}
+\renewcommand*{\raggedleftmarginnote}{}
+\setlength{\marginparsep}{7pt}
+\reversemarginpar
+
+% HEADINGS
+%--------------------------------
+\usepackage{sectsty} 
+\usepackage[normalem]{ulem} 
+\sectionfont{\rmfamily\mdseries} 
+\subsectionfont{\rmfamily\mdseries\scshape\normalsize} 
+\subsubsectionfont{\rmfamily\bfseries\upshape\normalsize} 
+
+% PDF SETUP
+%--------------------------------
+\usepackage{hyperref}
+\hypersetup
+{
+  pdfauthor={$name$},
+  pdfsubject={$name$'s CV},
+  pdftitle={$name$'s CV},
+  colorlinks, breaklinks, xetex, bookmarks,
+  filecolor=black,
+  urlcolor=[rgb]{0.117,0.682,0.858},
+  linkcolor=[rgb]{0.117,0.682,0.858},
+  linkcolor=[rgb]{0.117,0.682,0.858},
+  citecolor=[rgb]{0.117,0.682,0.858}
+}
+
+% BIBLIOGRAPHY
+%--------------------------------
+\usepackage[backend=biber]{biblatex}
+\addbibresource{$bibliography$}
+
+% DOCUMENT
+%--------------------------------
+\begin{document}
+
+{\LARGE $name$}\\[.2cm]
+
+$if(urls)$
+\begin{multicols}{2}
+$endif$
+
+$for(address)$
+$address$\\
+$endfor$
+
+
+\vspace{-10pt}
+
+\href{mailto:$email$}{$email$}\\
+
+
+$if(urls)$
+\columnbreak
+
+$if(urls.home)$
+{\small \faHome \href{http://$urls.home$}{$urls.home$}}
+$endif$
+
+$if(urls.linkedin)$
+{\small \faLinkedin \href{https://www.linkedin.com/in/$urls.linkedin$}{$urls.linkedin$}}
+$endif$
+
+$if(urls.twitter)$
+{\small \faTwitter \href{https://twitter.com/$urls.twitter$}{$urls.twitter$}}
+$endif$
+
+$if(urls.github)$
+{\small \faGithub \href{https://github.com/$urls.github$}{$urls.github$}}
+$endif$
+
+\end{multicols}
+$endif$
+
+
+\vspace{30pt}
+
+$if(intro)$
+$intro$
+$endif$
+
+\subsection*{Skills}
+$if(skills)$
+\begin{itemize}
+    $for(skills)$
+      \item $skills$
+    $endfor$
+\end{itemize}
+$endif$
+
+% \vfill
+
+\vspace{25pt}
+
+\section*{Experience}
+\noindent
+$for(experience)$
+\note{\begin{flushleft}$experience.years$\end{flushleft}}\textbf{$experience.job$}\\
+{$experience.employer$\\
+$if(experience.city)$ {\small \textcolor{gray}{$experience.city$}}$endif$\\
+$experience.description$\\[.2cm]
+$endfor$
+
+$if(education)$
+\section*{Education}
+\noindent
+$for(education)$
+\note{$education.year$}\textbf{$education.institute$}\\
+{$education.degree$} - {$education.field$}\\
+$if(education.grade)$$education.grade$$endif$\\[.2cm]
+$endfor$
+$endif$
+
+$if(award)$
+\section*{Awards}
+\noindent
+$for(award)$
+\note{$award.date$}\textbf{$award.title$}\\
+{$award.description$}
+$endfor$
+$endif$
+
+
+$if(languages)$
+\section*{Languages}
+$for(languages)$
+\emph{$languages.language$} ($languages.proficiency$)\\
+$endfor$
+$endif$
+
+$if(courses)$
+\section*{Courses}
+$for(courses)$
+$courses.course$\\
+$endfor$
+$endif$
+
+$if(bibliography)$
+\nocite{*}
+\printbibliography[title={Selected bibliography}]
+$endif$
+
+\vfill
+Last updated: \@date
+
+\end{document}
